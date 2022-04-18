@@ -51,6 +51,22 @@ class MyAlert {
         return view
     }()
 
+    private var titleLabel: UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.alpha = 0
+        return view
+    }()
+
+    private var messageLabel: UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        view.alpha = 0
+        return view
+    }()
+
     private var myTargetView: UIView?
 
     func showAlert(with title: String?, message: String?,
@@ -66,14 +82,14 @@ class MyAlert {
         alertView.frame = CGRect(x: 40, y: -300,
                                  width: targetView.frame.size.width - 80, height: 300)
 
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0,
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 0,
                                                width: alertView.frame.size.width, height: 80))
         titleLabel.textColor = .black
         titleLabel.text = title
         titleLabel.textAlignment = .center
         alertView.addSubview(titleLabel)
 
-        let messageLabel = UILabel(frame: CGRect(x: 0, y: 80,
+        messageLabel = UILabel(frame: CGRect(x: 0, y: 80,
                                                width: alertView.frame.size.width, height: 170))
         messageLabel.text = message
         messageLabel.textAlignment = .center
@@ -102,12 +118,23 @@ class MyAlert {
     }
 
     @objc fileprivate func dismissAlert() {
+        let bounds = UIScreen.main.bounds
+        let width = bounds.size.width
+        let height = bounds.size.height
         UIView.animate(withDuration: 0.2) {
             self.backgroundView.alpha = Constants.backgroundAlphaTo
         } completion: { done in
             if done {
-                UIView.animate(withDuration: 0.14, animations: {
+                UIView.animate(withDuration: 0.2, animations: {
                     self.alertView.alpha = 0
+                    self.titleLabel.alpha = 0
+                    self.messageLabel.alpha = 0
+                    self.titleLabel.removeFromSuperview()
+                    self.messageLabel.removeFromSuperview()
+                    self.alertView.frame = CGRect(x: width / 2,
+                                             y: height / 2,
+                                             width: 0,
+                                             height: 0)
                 }) { done in
                     if done {
                         self.alertView.removeFromSuperview()
