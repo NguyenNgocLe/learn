@@ -83,14 +83,14 @@ class MyAlert {
                                  width: targetView.frame.size.width - 80, height: 300)
 
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0,
-                                               width: alertView.frame.size.width, height: 80))
+                                           width: alertView.frame.size.width, height: 80))
         titleLabel.textColor = .black
         titleLabel.text = title
         titleLabel.textAlignment = .center
         alertView.addSubview(titleLabel)
 
         messageLabel = UILabel(frame: CGRect(x: 0, y: 80,
-                                               width: alertView.frame.size.width, height: 170))
+                                             width: alertView.frame.size.width, height: 170))
         messageLabel.text = message
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
@@ -132,9 +132,9 @@ class MyAlert {
                     self.titleLabel.removeFromSuperview()
                     self.messageLabel.removeFromSuperview()
                     self.alertView.frame = CGRect(x: width / 2,
-                                             y: height / 2,
-                                             width: 0,
-                                             height: 0)
+                                                  y: height / 2,
+                                                  width: 0,
+                                                  height: 0)
                 }) { done in
                     if done {
                         self.alertView.removeFromSuperview()
